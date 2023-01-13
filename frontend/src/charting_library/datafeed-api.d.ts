@@ -7,7 +7,7 @@ export declare type HistoryCallback = (
   bars: Bar[],
   meta?: HistoryMetadata
 ) => void;
-export declare type MarkConstColors = "red" | "green" | "blue" | "yellow";
+export declare type MarkConstColors = 'red' | 'green' | 'blue' | 'yellow';
 /**
  * This is the generic type useful for declaring a nominal type,
  * which does not structurally matches with the base type and
@@ -29,15 +29,15 @@ export declare type OnReadyCallback = (
 ) => void;
 export declare type QuoteData = QuoteOkData | QuoteErrorData;
 export declare type QuotesCallback = (data: QuoteData[]) => void;
-export declare type ResolutionString = Nominal<string, "ResolutionString">;
+export declare type ResolutionString = Nominal<string, 'ResolutionString'>;
 export declare type ResolveCallback = (symbolInfo: LibrarySymbolInfo) => void;
 export declare type SearchSymbolsCallback = (
   items: SearchSymbolResultItem[]
 ) => void;
-export declare type SeriesFormat = "price" | "volume";
+export declare type SeriesFormat = 'price' | 'volume';
 export declare type ServerTimeCallback = (serverTime: number) => void;
 export declare type SubscribeBarsCallback = (bar: Bar) => void;
-export declare type Timezone = "Etc/UTC" | CustomTimezones;
+export declare type Timezone = 'Etc/UTC' | CustomTimezones;
 export interface Bar {
   time: number;
   open: number;
@@ -248,7 +248,7 @@ export interface LibrarySymbolInfo {
    * Integer showing typical volume value decimal places for this symbol
    */
   volume_precision?: number;
-  data_status?: "streaming" | "endofday" | "pulsed" | "delayed_streaming";
+  data_status?: 'streaming' | 'endofday' | 'pulsed' | 'delayed_streaming';
   /**
    * Boolean showing whether this symbol is expired futures contract or not.
    */
@@ -285,12 +285,12 @@ export interface PeriodParams {
   firstDataRequest: boolean;
 }
 export interface QuoteErrorData {
-  s: "error";
+  s: 'error';
   n: string;
   v: object;
 }
 export interface QuoteOkData {
-  s: "ok";
+  s: 'ok';
   n: string;
   v: DatafeedQuoteValues;
 }
@@ -319,82 +319,82 @@ export interface Unit {
   description: string;
 }
 export type CustomTimezones =
-  | "Africa/Cairo"
-  | "Africa/Johannesburg"
-  | "Africa/Lagos"
-  | "America/Argentina/Buenos_Aires"
-  | "America/Bogota"
-  | "America/Caracas"
-  | "America/Chicago"
-  | "America/El_Salvador"
-  | "America/Juneau"
-  | "America/Lima"
-  | "America/Los_Angeles"
-  | "America/Mexico_City"
-  | "America/New_York"
-  | "America/Phoenix"
-  | "America/Santiago"
-  | "America/Sao_Paulo"
-  | "America/Toronto"
-  | "America/Vancouver"
-  | "Asia/Almaty"
-  | "Asia/Ashkhabad"
-  | "Asia/Bahrain"
-  | "Asia/Bangkok"
-  | "Asia/Chongqing"
-  | "Asia/Dubai"
-  | "Asia/Ho_Chi_Minh"
-  | "Asia/Hong_Kong"
-  | "Asia/Jakarta"
-  | "Asia/Jerusalem"
-  | "Asia/Kathmandu"
-  | "Asia/Kolkata"
-  | "Asia/Kuwait"
-  | "Asia/Muscat"
-  | "Asia/Qatar"
-  | "Asia/Riyadh"
-  | "Asia/Seoul"
-  | "Asia/Shanghai"
-  | "Asia/Singapore"
-  | "Asia/Taipei"
-  | "Asia/Tehran"
-  | "Asia/Tokyo"
-  | "Atlantic/Reykjavik"
-  | "Australia/ACT"
-  | "Australia/Adelaide"
-  | "Australia/Brisbane"
-  | "Australia/Perth"
-  | "Australia/Sydney"
-  | "Europe/Amsterdam"
-  | "Europe/Athens"
-  | "Europe/Belgrade"
-  | "Europe/Berlin"
-  | "Europe/Brussels"
-  | "Europe/Copenhagen"
-  | "Europe/Dublin"
-  | "Europe/Helsinki"
-  | "Europe/Istanbul"
-  | "Europe/Lisbon"
-  | "Europe/London"
-  | "Europe/Luxembourg"
-  | "Europe/Madrid"
-  | "Europe/Malta"
-  | "Europe/Moscow"
-  | "Europe/Oslo"
-  | "Europe/Paris"
-  | "Europe/Riga"
-  | "Europe/Rome"
-  | "Europe/Stockholm"
-  | "Europe/Tallinn"
-  | "Europe/Vilnius"
-  | "Europe/Warsaw"
-  | "Europe/Zurich"
-  | "Pacific/Auckland"
-  | "Pacific/Chatham"
-  | "Pacific/Fakaofo"
-  | "Pacific/Honolulu"
-  | "Pacific/Norfolk"
-  | "US/Mountain";
+  | 'Africa/Cairo'
+  | 'Africa/Johannesburg'
+  | 'Africa/Lagos'
+  | 'America/Argentina/Buenos_Aires'
+  | 'America/Bogota'
+  | 'America/Caracas'
+  | 'America/Chicago'
+  | 'America/El_Salvador'
+  | 'America/Juneau'
+  | 'America/Lima'
+  | 'America/Los_Angeles'
+  | 'America/Mexico_City'
+  | 'America/New_York'
+  | 'America/Phoenix'
+  | 'America/Santiago'
+  | 'America/Sao_Paulo'
+  | 'America/Toronto'
+  | 'America/Vancouver'
+  | 'Asia/Almaty'
+  | 'Asia/Ashkhabad'
+  | 'Asia/Bahrain'
+  | 'Asia/Bangkok'
+  | 'Asia/Chongqing'
+  | 'Asia/Dubai'
+  | 'Asia/Ho_Chi_Minh'
+  | 'Asia/Hong_Kong'
+  | 'Asia/Jakarta'
+  | 'Asia/Jerusalem'
+  | 'Asia/Kathmandu'
+  | 'Asia/Kolkata'
+  | 'Asia/Kuwait'
+  | 'Asia/Muscat'
+  | 'Asia/Qatar'
+  | 'Asia/Riyadh'
+  | 'Asia/Seoul'
+  | 'Asia/Shanghai'
+  | 'Asia/Singapore'
+  | 'Asia/Taipei'
+  | 'Asia/Tehran'
+  | 'Asia/Tokyo'
+  | 'Atlantic/Reykjavik'
+  | 'Australia/ACT'
+  | 'Australia/Adelaide'
+  | 'Australia/Brisbane'
+  | 'Australia/Perth'
+  | 'Australia/Sydney'
+  | 'Europe/Amsterdam'
+  | 'Europe/Athens'
+  | 'Europe/Belgrade'
+  | 'Europe/Berlin'
+  | 'Europe/Brussels'
+  | 'Europe/Copenhagen'
+  | 'Europe/Dublin'
+  | 'Europe/Helsinki'
+  | 'Europe/Istanbul'
+  | 'Europe/Lisbon'
+  | 'Europe/London'
+  | 'Europe/Luxembourg'
+  | 'Europe/Madrid'
+  | 'Europe/Malta'
+  | 'Europe/Moscow'
+  | 'Europe/Oslo'
+  | 'Europe/Paris'
+  | 'Europe/Riga'
+  | 'Europe/Rome'
+  | 'Europe/Stockholm'
+  | 'Europe/Tallinn'
+  | 'Europe/Vilnius'
+  | 'Europe/Warsaw'
+  | 'Europe/Zurich'
+  | 'Pacific/Auckland'
+  | 'Pacific/Chatham'
+  | 'Pacific/Fakaofo'
+  | 'Pacific/Honolulu'
+  | 'Pacific/Norfolk'
+  | 'US/Mountain';
 
 export as namespace TradingView;
 
