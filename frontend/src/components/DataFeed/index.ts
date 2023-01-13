@@ -7,6 +7,10 @@ import type {
     SymbolResolveExtension,
     SearchSymbolResultItem,
     LibrarySymbolInfo,
+    PeriodParams,
+    HistoryCallback,
+    Bar,
+    SubscribeBarsCallback,
 } from "charting_library";
 
 const configurationData: DatafeedConfiguration = {
@@ -105,4 +109,38 @@ export const resolveSymbol = (
     };
     console.log("[resolveSymbol]: Symbol resolved", symbolName);
     onResolve(symbolInfo);
+};
+
+export const getBars = (
+    symbolInfo: LibrarySymbolInfo,
+    resolution: ResolutionString,
+    periodParams: PeriodParams,
+    onResult: HistoryCallback,
+    onError: ErrorCallback
+): void => {
+    const { from, to, firstDataRequest } = periodParams;
+    console.log("[getBars]: Method call", symbolInfo, resolution, from, to);
+
+    const bars: Bar[] = [];
+    onResult(bars, { noData: false });
+};
+
+export const subscribeBars = (
+    symbolInfo: LibrarySymbolInfo,
+    resolution: ResolutionString,
+    onTick: SubscribeBarsCallback,
+    listenerGuid: string,
+    onResetCacheNeededCallback: () => void
+): void => {
+    console.log(
+        "[subscribeBars]: Method call with subscriberUID:",
+        listenerGuid
+    );
+};
+
+export const unsubscribeBars = (listenerGuid: string): void => {
+    console.log(
+        "[unsubscribeBars]: Method call with listenerGuid:",
+        listenerGuid
+    );
 };
