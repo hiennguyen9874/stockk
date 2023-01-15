@@ -1,25 +1,40 @@
+from enum import Enum
+
 from typing import Optional
 
 from pydantic import BaseModel
 
-from app.schemas.industry import Industry, IndustryInDBBase
+__all__ = ["Ticker", "TickerCreate", "TickerUpdate", "TickerType", "TickerExchange"]
 
-__all__ = ["Ticker", "TickerCreate", "TickerUpdate"]
+
+class TickerType(str, Enum):
+    vn_stock = "vn_stock"
+    crypto = "crypto"
+
+
+class TickerExchange(str, Enum):
+    UPCOM = "UPCOM"
+    HNX = "HNX"
+    HOSE = "HOSE"
 
 
 class TickerBase(BaseModel):
     ticker: Optional[str] = None
-    companyName: Optional[str] = None
-    shortName: Optional[str] = None
-    exchange: Optional[str] = None
+    exchange: Optional[TickerExchange] = None
+    name: Optional[str] = None
+    full_name: Optional[str] = None
+    short_name: Optional[str] = None
+    type: Optional[TickerType] = None
 
 
 # Properties to receive on item creation
 class TickerCreate(TickerBase):
     ticker: str
-    companyName: str
-    shortName: str
-    exchange: str
+    exchange: Optional[TickerExchange] = None
+    name: str
+    full_name: str
+    short_name: str
+    type: TickerType
 
 
 # Properties to receive on item update
@@ -33,15 +48,14 @@ class TickerInDBBase(TickerBase):
         orm_mode = True
 
     ticker: str
-    companyName: str
-    shortName: str
-    exchange: str
-    industry: IndustryInDBBase
+    exchange: TickerExchange
+    name: str
+    full_name: str
+    short_name: str
+    type: TickerType
 
 
 # Properties to return to client
 class Ticker(TickerInDBBase):
     class Config:
         orm_mode = True
-
-    industry: Industry

@@ -1,3 +1,9 @@
 - https://community.bitquery.io/t/bitquery-api-integration-with-tradingview-technical-analysis-charts-dex-apis/244
 - https://zlq4863947.gitbook.io/tradingview/2-ru-men-zhi-nan/package-content
 - https://github.com/mirql/charting-library-wiki/wiki/Package-Content
+- https://github.com/bergusman/tradingview-udf-binance-node
+- https://www.tradingview.com/rest-api-spec/#operation/getHistory
+- https://github.com/vsadeghizade/tradingview-udf-binance-websocket
+- https://github.com/Marfusios/tradingview-udf-provider
+- https://github.com/tradingview/saveload_backend
+- https://github.com/tradingview/saveload_backend/issues/3

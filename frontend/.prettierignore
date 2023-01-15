@@ -2,3 +2,6 @@ packages/**/*.js
 packages/**/*.cjs
 packages/**/*.d.ts
 node_modules
+src/charting_library/**/*
+public/charting_library/**/*
+public/datafeeds/**/*

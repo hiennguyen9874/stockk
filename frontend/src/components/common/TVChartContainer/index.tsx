@@ -50,25 +50,26 @@ function TVChartContainer({
         // BEWARE: no trailing slash is expected in feed URL
         // tslint:disable-next-line:no-any
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-explicit-any
-        // datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
-        //   datafeedUrl
-        // ),
+        datafeed: new (window as any).Datafeeds.UDFCompatibleDatafeed(
+          datafeedUrl
+        ),
+        // datafeed,
         interval: interval || ('D' as ResolutionString),
         container: containerRef.current,
         library_path: libraryPath as string,
         locale: 'vi',
-        // disabled_features: ['use_localstorage_for_settings'],
-        // enabled_features: ['study_templates'],
-        // charts_storage_url: chartsStorageUrl,
-        // charts_storage_api_version: chartsStorageApiVersion,
-        // client_id: clientId,
-        // user_id: userId,
+        disabled_features: ['use_localstorage_for_settings'],
+        enabled_features: ['study_templates'],
+        charts_storage_url: chartsStorageUrl,
+        charts_storage_api_version: chartsStorageApiVersion,
+        client_id: clientId,
+        user_id: userId,
         fullscreen,
         autosize,
         studies_overrides: studiesOverrides,
-        datafeed,
       };
-      // eslint-disable-next-line new-cap
+
+      // eslint-disable-next-line new-cap, no-multi-assign, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access
       tvWidgetRef.current = new widget(widgetOptions);
 
       tvWidgetRef.current.onChartReady(() => {

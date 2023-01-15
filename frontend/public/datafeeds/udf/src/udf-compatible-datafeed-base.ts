@@ -18,7 +18,7 @@ import {
 	SubscribeBarsCallback,
 	TimescaleMark,
 	SymbolResolveExtension,
-} from '../../../charting_library/datafeed-api';
+} from '../charting_library/datafeed-api';
 
 import {
 	getErrorMessage,

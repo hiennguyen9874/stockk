@@ -2,6 +2,7 @@
 import { AxiosResponse } from 'axios';
 
 import authHeader, { axiosInstance } from './auth-header';
+import { Response } from './utils';
 
 const API_URL = '/api/v0/tcbs/';
 
@@ -15,7 +16,7 @@ export interface SearchSymbolResultItem {
 
 export const searchSymbolsByKey = (
   key: string
-): Promise<AxiosResponse<SearchSymbolResultItem[]>> =>
+): Promise<AxiosResponse<Response<SearchSymbolResultItem[]>>> =>
   axiosInstance.get(`${API_URL}search`, {
     headers: authHeader(),
     params: {

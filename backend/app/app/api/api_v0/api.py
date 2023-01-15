@@ -2,7 +2,15 @@ from typing import Dict, Union
 
 from fastapi import APIRouter
 
-from app.api.api_v0.endpoints import industries, items, login, tickers, users, util, tcbs
+from app.api.api_v0.endpoints import (
+    industries,
+    items,
+    login,
+    tickers,
+    users,
+    util,
+    tradingview,
+)
 from app.schemas.response import ErrorResponse, ValidationErrorResponse
 
 api_router = APIRouter(
@@ -118,23 +126,4 @@ api_router.include_router(
     },
 )
 
-
-api_router.include_router(
-    tcbs.router,
-    prefix="/tcbs",
-    tags=["tcbs"],
-    responses={
-        400: {
-            "model": ErrorResponse[Union[str, Dict]],
-            "description": "Could not validate credentials",
-        },
-        403: {
-            "model": ErrorResponse[Union[str, Dict]],
-            "description": "Inactive user or The user doesn't have enough privileges",
-        },
-        404: {
-            "model": ErrorResponse[Union[str, Dict]],
-            "description": "User not found",
-        },
-    },
-)
+api_router.include_router(tradingview.router, prefix="/tradingview", tags=["tradingview"])

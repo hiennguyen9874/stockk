@@ -15,11 +15,9 @@ __all__ = ["Ticker"]
 
 class Ticker(Base):
     id = Column(Integer, primary_key=True, index=True)
-    ticker = Column(String, index=True)
-    companyName = Column(String)
-    shortName = Column(String)
+    ticker = Column(String, index=True, unique=True)
     exchange = Column(String)
-    industry_id = Column(Integer, ForeignKey("industry.id"))
-    industry: RelationshipProperty[Industry] = relationship(
-        "Industry", backref="tickers", lazy="select"
-    )
+    name = Column(String)
+    full_name = Column(String)
+    short_name = Column(String)
+    type = Column(String)

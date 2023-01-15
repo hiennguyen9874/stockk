@@ -2,7 +2,7 @@ import {
 	LibrarySymbolInfo,
 	SearchSymbolResultItem,
 	ResolutionString,
-} from '../../../charting_library/datafeed-api';
+} from '../charting_library/datafeed-api';
 
 import {
 	getErrorMessage,

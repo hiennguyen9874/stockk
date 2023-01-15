@@ -1,7 +1,7 @@
 import {
 	LibrarySymbolInfo,
 	SubscribeBarsCallback,
-} from '../../../charting_library/datafeed-api';
+} from '../charting_library/datafeed-api';
 
 import {
 	GetBarsResult,
