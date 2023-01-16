@@ -11,10 +11,10 @@ from sentry_sdk.integrations.asgi import SentryAsgiMiddleware
 from starlette.middleware.sessions import SessionMiddleware
 
 from app.api.api_v0.api import api_router as api_router_v0
-from app.api.api_v0.deps import add_swagger_config
+from app.api.deps import add_swagger_config
 from app.core.settings import settings
 from app.custom_logging import CustomizeLogger
-from app.schemas.response import Error, ErrorResponse, Status, ValidationErrorResponse
+from app.schemas.response import ErrorResponse, Status, ValidationErrorResponse
 from app.signals import *  # noqa
 
 sentry_sdk.init(
@@ -66,7 +66,7 @@ async def validation_exception_handler(
     # Override request validation exceptions
     return JSONResponse(
         content=ValidationErrorResponse(
-            status=Status.error, error=Error(code=400, message=exc.errors())
+            status=Status.error, message=exc.errors()
         ).dict(),
         status_code=400,
     )
@@ -80,7 +80,7 @@ async def http_exception_handler(request: Request, exc: HTTPException) -> JSONRe
     return JSONResponse(
         content=ErrorResponse(
             status=Status.error,
-            error=Error(code=exc.status_code, message=str(exc.detail)),
+            message=str(exc.detail),
         ).dict(),
         status_code=exc.status_code,
     )

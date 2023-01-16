@@ -6,7 +6,7 @@ from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 from app.utils import get_limit_offset
 
@@ -24,7 +24,7 @@ async def create_item(
     Create new item.
     """
     item = await crud.item.create_with_owner(db=db, obj_in=item_in, owner_id=current_user.id)
-    return SuccessfulResponse(data=item, status=Status.success)
+    return SuccessfulResponse(data=item, status=Status.ok)
 
 
 @router.get("/", response_model=SuccessfulResponse[Page[schemas.Item]])
@@ -40,7 +40,7 @@ async def read_items(
     limit, offset = get_limit_offset(params)
 
     items, total = await crud.item.get_multi_count(db, offset=offset, limit=limit)
-    return SuccessfulResponse(data=create_page(items, total, params), status=Status.success)
+    return SuccessfulResponse(data=create_page(items, total, params), status=Status.ok)
 
 
 @router.get("/{id}", response_model=SuccessfulResponse[schemas.Item])
@@ -56,7 +56,7 @@ async def read_item(
     item = await crud.item.get(db=db, id=id)
     if not item:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
-    return SuccessfulResponse(data=item, status=Status.success)
+    return SuccessfulResponse(data=item, status=Status.ok)
 
 
 @router.put("/{id}", response_model=SuccessfulResponse[schemas.Item])
@@ -74,7 +74,7 @@ async def update_item(
     if not item:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Item not found")
     item = await crud.item.update(db=db, db_obj=item, obj_in=item_in)
-    return SuccessfulResponse(data=item, status=Status.success)
+    return SuccessfulResponse(data=item, status=Status.ok)
 
 
 @router.delete("/{id}", response_model=SuccessfulResponse[schemas.Item])
@@ -96,4 +96,4 @@ async def delete_item(
 
     item = await crud.item.remove(db=db, id=id)
 
-    return SuccessfulResponse(data=item, status=Status.success)
+    return SuccessfulResponse(data=item, status=Status.ok)

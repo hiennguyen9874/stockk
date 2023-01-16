@@ -2,15 +2,15 @@ from typing import Optional
 
 import pandas as pd
 import requests
-from celery import shared_task
 from loguru import logger
 
 from app import crud, deps, schemas
+from app.worker import app
 
 __all__ = ["task_crawl_ticker"]
 
 
-@shared_task(name="task_crawl_ticker")
+@app.task(name="task_crawl_ticker")
 def task_crawl_ticker() -> None:
     # Get list of tickers from ssi
 

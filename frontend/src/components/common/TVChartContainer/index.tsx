@@ -67,6 +67,8 @@ function TVChartContainer({
         fullscreen,
         autosize,
         studies_overrides: studiesOverrides,
+        auto_save_delay: 1,
+        theme: 'Dark',
       };
 
       // eslint-disable-next-line new-cap, no-multi-assign, @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access

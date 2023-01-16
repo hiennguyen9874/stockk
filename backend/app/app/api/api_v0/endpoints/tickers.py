@@ -6,7 +6,7 @@ from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 from app.utils import get_limit_offset
 
@@ -24,7 +24,7 @@ async def create_ticker(
     Create new ticker.
     """
     ticker = await crud.ticker.create(db=db, obj_in=ticker_in)
-    return SuccessfulResponse(data=ticker, status=Status.success)
+    return SuccessfulResponse(data=ticker, status=Status.ok)
 
 
 @router.get("/", response_model=SuccessfulResponse[Page[schemas.Ticker]])
@@ -40,7 +40,7 @@ async def read_tickers(
     limit, offset = get_limit_offset(params)
 
     tickers, total = await crud.ticker.get_multi_count(db, offset=offset, limit=limit)
-    return SuccessfulResponse(data=create_page(tickers, total, params), status=Status.success)
+    return SuccessfulResponse(data=create_page(tickers, total, params), status=Status.ok)
 
 
 @router.get("/{id}", response_model=SuccessfulResponse[schemas.Ticker])
@@ -56,7 +56,7 @@ async def read_ticker(
     ticker = await crud.ticker.get(db=db, id=id)
     if not ticker:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ticker not found")
-    return SuccessfulResponse(data=ticker, status=Status.success)
+    return SuccessfulResponse(data=ticker, status=Status.ok)
 
 
 @router.put("/{id}", response_model=SuccessfulResponse[schemas.Ticker])
@@ -74,7 +74,7 @@ async def update_ticker(
     if not ticker:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Ticker not found")
     ticker = await crud.ticker.update(db=db, db_obj=ticker, obj_in=ticker_in)
-    return SuccessfulResponse(data=ticker, status=Status.success)
+    return SuccessfulResponse(data=ticker, status=Status.ok)
 
 
 @router.delete("/{id}", response_model=SuccessfulResponse[schemas.Ticker])
@@ -96,4 +96,4 @@ async def delete_ticker(
 
     ticker = await crud.ticker.remove(db=db, id=id)
 
-    return SuccessfulResponse(data=ticker, status=Status.success)
+    return SuccessfulResponse(data=ticker, status=Status.ok)

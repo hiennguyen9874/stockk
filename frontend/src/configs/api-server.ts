@@ -20,3 +20,5 @@ switch (process.env.NODE_ENV) {
 export const API_SERVER = API_SERVER_VAL;
 
 export const API_DATAFEED_URL = `${API_SERVER}/api/v0/tradingview`;
+
+export const API_STORAGE_URL = `${API_SERVER}/api/v0`;

@@ -7,7 +7,7 @@ from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 from app.utils import get_limit_offset
 
@@ -27,7 +27,7 @@ async def read_users(
     limit, offset = get_limit_offset(params)
 
     users, total = await crud.user.get_multi_count(db, offset=offset, limit=limit)
-    return SuccessfulResponse(data=create_page(users, total, params), status=Status.success)
+    return SuccessfulResponse(data=create_page(users, total, params), status=Status.ok)
 
 
 @router.put("/me", response_model=SuccessfulResponse[schemas.User])
@@ -45,7 +45,7 @@ async def update_user_me(
     if full_name is not None:
         user_in.full_name = full_name
     user = await crud.user.update(db, db_obj=current_user, obj_in=user_in)
-    return SuccessfulResponse(data=user, status=Status.success)
+    return SuccessfulResponse(data=user, status=Status.ok)
 
 
 @router.get("/me", response_model=SuccessfulResponse[schemas.User])
@@ -57,7 +57,7 @@ async def read_user_me(
     Get current user.
     """
 
-    return SuccessfulResponse(data=current_user, status=Status.success)
+    return SuccessfulResponse(data=current_user, status=Status.ok)
 
 
 @router.get("/oidc_me", response_model=SuccessfulResponse[schemas.OIDCUser])
@@ -68,7 +68,7 @@ async def read_user_oidc_me(
     """
     Get oidc user info.
     """
-    return SuccessfulResponse(data=current_user, status=Status.success)
+    return SuccessfulResponse(data=current_user, status=Status.ok)
 
 
 @router.get("/{user_id}", response_model=SuccessfulResponse[schemas.User])
@@ -82,8 +82,8 @@ async def read_user_by_id(
     """
     user = await crud.user.get(db, id=user_id)
     if user == current_user:
-        return SuccessfulResponse(data=user, status=Status.success)
-    return SuccessfulResponse(data=user, status=Status.success)
+        return SuccessfulResponse(data=user, status=Status.ok)
+    return SuccessfulResponse(data=user, status=Status.ok)
 
 
 @router.put("/{user_id}", response_model=SuccessfulResponse[schemas.User])
@@ -104,4 +104,4 @@ async def update_user(
             detail="The user with this username does not exist in the system",
         )
     user = await crud.user.update(db, db_obj=user, obj_in=user_in)
-    return SuccessfulResponse(data=user, status=Status.success)
+    return SuccessfulResponse(data=user, status=Status.ok)

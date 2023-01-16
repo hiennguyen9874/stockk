@@ -6,7 +6,7 @@ from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 from app.utils import get_limit_offset
 
@@ -24,7 +24,7 @@ async def create_industry(
     Create new industry.
     """
     industry = await crud.industry.create(db=db, obj_in=industry_in)
-    return SuccessfulResponse(data=industry, status=Status.success)
+    return SuccessfulResponse(data=industry, status=Status.ok)
 
 
 @router.get("/", response_model=SuccessfulResponse[Page[schemas.Industry]])
@@ -40,7 +40,7 @@ async def read_industries(
     limit, offset = get_limit_offset(params)
 
     industries, total = await crud.industry.get_multi_count(db, offset=offset, limit=limit)
-    return SuccessfulResponse(data=create_page(industries, total, params), status=Status.success)
+    return SuccessfulResponse(data=create_page(industries, total, params), status=Status.ok)
 
 
 @router.get("/{id}", response_model=SuccessfulResponse[schemas.Industry])
@@ -56,7 +56,7 @@ async def read_industry(
     industry = await crud.industry.get(db=db, id=id)
     if not industry:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Industry not found")
-    return SuccessfulResponse(data=industry, status=Status.success)
+    return SuccessfulResponse(data=industry, status=Status.ok)
 
 
 @router.put("/{id}", response_model=SuccessfulResponse[schemas.Industry])
@@ -74,7 +74,7 @@ async def update_industry(
     if not industry:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Industry not found")
     industry = await crud.industry.update(db=db, db_obj=industry, obj_in=industry_in)
-    return SuccessfulResponse(data=industry, status=Status.success)
+    return SuccessfulResponse(data=industry, status=Status.ok)
 
 
 @router.delete("/{id}", response_model=SuccessfulResponse[schemas.Industry])
@@ -96,4 +96,4 @@ async def delete_industry(
 
     industry = await crud.industry.remove(db=db, id=id)
 
-    return SuccessfulResponse(data=industry, status=Status.success)
+    return SuccessfulResponse(data=industry, status=Status.ok)

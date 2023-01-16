@@ -17,4 +17,4 @@ def config_loggers(*args, **kwargs) -> logging.Logger:  # type: ignore
     return CustomizeLogger.make_logger(Path(__file__).with_name("celery_logging.json"))
 
 
-celery = create_celery_app()
+app = create_celery_app()

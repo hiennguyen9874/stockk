@@ -9,7 +9,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import models, schemas, crud
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 
 router = APIRouter()

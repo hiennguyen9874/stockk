@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app import crud, models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.core import security
 from app.core.settings import settings
 from app.schemas.response import ErrorResponse

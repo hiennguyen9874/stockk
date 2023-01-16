@@ -8,35 +8,27 @@ DataT = TypeVar("DataT")
 ErrorT = TypeVar("ErrorT")
 
 
-__all__ = ["Error", "Status", "ErrorResponse", "SuccessfulResponse"]
-
-
-class Error(BaseModel, Generic[ErrorT]):
-    code: int
-    message: ErrorT
+__all__ = ["Status", "ErrorResponse", "SuccessfulResponse"]
 
 
 class Status(str, Enum):
-    success = "success"
+    ok = "ok"
     error = "error"
 
 
 class ErrorResponse(GenericModel, Generic[ErrorT]):
     status: Status = Field(Status.error)
-    error: Error[ErrorT] = Field(..., example=Error(code=400, message="Error message"))
+    message: ErrorT = Field(..., example="Error message")
     data: Optional[Any] = Field(None, example="null")
 
 
 class ValidationErrorResponse(GenericModel, Generic[ErrorT]):
     status: Status = Field(Status.error)
-    error: Error[ErrorT] = Field(
-        ...,
-        example=Error(code=422, message=[{"loc": ["string"], "msg": "string", "type": "string"}]),
-    )
+    message: ErrorT = Field(..., example=[{"loc": ["string"], "msg": "string", "type": "string"}])
     data: Optional[Any] = Field(None, example="null")
 
 
 class SuccessfulResponse(GenericModel, Generic[DataT]):
-    status: Status = Field(Status.success)
+    status: Status = Field(Status.ok)
     data: Optional[DataT] = None
     error: Optional[Any] = Field(None, example="null")

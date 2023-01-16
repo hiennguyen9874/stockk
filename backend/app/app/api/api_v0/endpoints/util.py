@@ -3,7 +3,7 @@ from typing import Any
 from fastapi import APIRouter, Depends
 
 from app import models, schemas
-from app.api.api_v0 import deps
+from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
 from app.tasks import test_celery as test_celery_task, task_crawl_ticker
 
@@ -21,7 +21,7 @@ async def test_celery(
     # task = test_celery_task.delay(msg.msg)
     task = task_crawl_ticker.delay()
     task.get()
-    return SuccessfulResponse(data={"msg": "Word received"}, status=Status.success)
+    return SuccessfulResponse(data={"msg": "Word received"}, status=Status.ok)
 
 
 # Calling this endpoint to see if the setup works. If yes, an error message will show in Sentry dashboard

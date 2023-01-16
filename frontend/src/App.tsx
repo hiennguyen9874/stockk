@@ -1,6 +1,6 @@
 import TVChartContainer from 'components/common/TVChartContainer';
 import Datafeed from 'containers/DataFeed';
-import { API_DATAFEED_URL } from 'configs/api-server';
+import { API_DATAFEED_URL, API_STORAGE_URL } from 'configs/api-server';
 
 import './App.css';
 
@@ -13,6 +13,7 @@ function App() {
           datafeed={Datafeed}
           symbol="TCB"
           datafeedUrl={API_DATAFEED_URL}
+          chartsStorageUrl={API_STORAGE_URL}
         />
       </div>
     </div>
