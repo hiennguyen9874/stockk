@@ -153,19 +153,18 @@ async def get_history(
     """
 
     headers = {
-        "Accept": "*/*",
+        "Accept": "application/json, text/plain, */*",
         "Accept-Language": "vi,en;q=0.9",
         "Connection": "keep-alive",
-        "Origin": "https://chart.vps.com.vn",
-        "Referer": "https://chart.vps.com.vn/",
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
-        "Sec-Fetch-Site": "same-site",
+        "Sec-Fetch-Site": "same-origin",
         "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
         "sec-ch-ua": '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"Linux"',
     }
+
     params = {
         "resolution": resolution,
         "symbol": symbol,
@@ -175,7 +174,7 @@ async def get_history(
 
     async with httpx.AsyncClient(http2=True) as client:
         response = await client.get(
-            "https://histdatafeed.vps.com.vn/tradingview/history",
+            "https://iboard.ssi.com.vn/dchart/api/history",
             params=params,
             headers=headers,
         )

@@ -2,6 +2,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
+from datetime import timedelta
+
 from celery.schedules import crontab
 from pydantic import AnyHttpUrl, BaseSettings, HttpUrl, PostgresDsn, validator
 
@@ -77,14 +79,14 @@ class Settings(BaseSettings):
     CELERY_IMPORTS = ("app.tasks",)
 
     CELERY_BEAT_SCHEDULE: dict = {
-        "task-schedule-work": {
-            "task": "task_schedule_work",
-            "schedule": crontab(minute=1),
-        },
-        # "task-crawl-ticker": {
-        #     "task": "task_crawl_ticker",
-        #     "schedule": crontab(minute=1),
+        # "task-schedule-work": {
+        #     "task": "task_schedule_work",
+        #     "schedule": timedelta(seconds=10),
         # },
+        "task-crawl-ticker": {
+            "task": "task_crawl_ticker",
+            "schedule": timedelta(minutes=1),
+        },
     }
 
     SENTRY_DSN: Optional[HttpUrl] = None

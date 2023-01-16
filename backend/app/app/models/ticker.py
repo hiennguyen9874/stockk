@@ -15,9 +15,9 @@ __all__ = ["Ticker"]
 
 class Ticker(Base):
     id = Column(Integer, primary_key=True, index=True)
-    ticker = Column(String, index=True, unique=True)
-    exchange = Column(String)
-    name = Column(String)
-    full_name = Column(String)
-    short_name = Column(String)
-    type = Column(String)
+    ticker = Column(String, index=True, unique=True, nullable=False)
+    exchange = Column(String, nullable=False)
+    name = Column(String, nullable=False)
+    full_name = Column(String, nullable=False)
+    short_name = Column(String, nullable=False)
+    type = Column(String, nullable=False)

@@ -7,5 +7,5 @@ __all__ = ["Industry"]
 
 class Industry(Base):
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)
-    enName = Column(String)
+    name = Column(String, nullable=False)
+    enName = Column(String, nullable=False)

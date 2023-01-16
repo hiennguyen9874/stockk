@@ -31,4 +31,4 @@ class ValidationErrorResponse(GenericModel, Generic[ErrorT]):
 class SuccessfulResponse(GenericModel, Generic[DataT]):
     status: Status = Field(Status.ok)
     data: Optional[DataT] = None
-    error: Optional[Any] = Field(None, example="null")
+    message: Optional[Any] = Field(None, example="null")

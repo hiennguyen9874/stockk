@@ -13,7 +13,7 @@ from app.schemas.study_template import StudyTemplateCreate, StudyTemplateUpdate
 
 class CRUDStudyTemplate(CRUDBase[StudyTemplate, StudyTemplateCreate, StudyTemplateUpdate]):
     async def get_or_create_with_owner_name(
-        self, db: AsyncSession, ownerSource: str, ownerId: str, name: str, content: Dict[Any, Any]
+        self, db: AsyncSession, ownerSource: str, ownerId: str, name: str, content: str
     ) -> Tuple[StudyTemplate, bool]:
         study_template = (
             (
@@ -34,7 +34,7 @@ class CRUDStudyTemplate(CRUDBase[StudyTemplate, StudyTemplateCreate, StudyTempla
 
         try:
             study_template = self.model(
-                ownerSource=ownerSource, ownerId=ownerId, name=name, content=content
+                ownerSource=ownerSource, ownerId=ownerId, name=name, content=json.loads(content)
             )
             db.add(study_template)
             await db.commit()

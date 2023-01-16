@@ -2,6 +2,7 @@ from typing import Optional
 
 import pandas as pd
 import requests
+
 from loguru import logger
 
 from app import crud, deps, schemas

@@ -19,8 +19,8 @@ __all__ = ["DrawingTemplate"]
 
 class DrawingTemplate(Base):
     id = Column(Integer, primary_key=True, index=True)
-    ownerSource = Column(String, index=True)
-    ownerId = Column(String, index=True)
-    name = Column(String)
-    tool = Column(String)
-    content = Column(JSONB)
+    ownerSource = Column(String, index=True, nullable=False)
+    ownerId = Column(String, index=True, nullable=False)
+    name = Column(String, nullable=False)
+    tool = Column(String, nullable=False)
+    content = Column(JSONB, nullable=False)

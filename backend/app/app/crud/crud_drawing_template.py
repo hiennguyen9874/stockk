@@ -13,7 +13,7 @@ from app.schemas.drawing_template import DrawingTemplateCreate, DrawingTemplateU
 
 class CRUDDrawingTemplate(CRUDBase[DrawingTemplate, DrawingTemplateCreate, DrawingTemplateUpdate]):
     async def get_or_create_with_owner_name(
-        self, db: AsyncSession, ownerSource: str, ownerId: str, name: str, content: Dict[Any, Any]
+        self, db: AsyncSession, ownerSource: str, ownerId: str, name: str, content: str
     ) -> Tuple[DrawingTemplate, bool]:
         study_template = (
             (
@@ -34,7 +34,7 @@ class CRUDDrawingTemplate(CRUDBase[DrawingTemplate, DrawingTemplateCreate, Drawi
 
         try:
             study_template = self.model(
-                ownerSource=ownerSource, ownerId=ownerId, name=name, content=content
+                ownerSource=ownerSource, ownerId=ownerId, name=name, content=json.loads(content)
             )
             db.add(study_template)
             await db.commit()

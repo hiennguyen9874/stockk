@@ -1,7 +1,8 @@
 import time
+import json
 from typing import Any, Optional, Dict, Union, List
 
-from fastapi import APIRouter, Depends, HTTPException, status, Query, Body
+from fastapi import APIRouter, Depends, HTTPException, status, Query, Form
 from fastapi_pagination.api import create_page, resolve_params
 from fastapi_pagination.default import Page, Params
 from sqlalchemy.ext.asyncio import AsyncSession
@@ -26,11 +27,10 @@ async def create_update_chart(
     clientId: str = Query(..., alias="client"),
     userId: str = Query(..., alias="user"),
     chartId: Optional[str] = Query(""),
-    chartName: str = Body(..., alias="name"),
-    symbol: str = Body(...),
-    resolution: str = Body(...),
-    content: Dict[Any, Any] = Body(...),
-    current_user: models.User = Depends(deps.get_current_active_user),
+    chartName: str = Form(..., alias="name"),
+    symbol: str = Form(...),
+    resolution: str = Form(...),
+    content: str = Form(...),
 ) -> Any:
     """
     Create new chart or update chart with chartId when charID != ''.
@@ -44,7 +44,7 @@ async def create_update_chart(
                 name=chartName,
                 symbol=symbol,
                 resolution=resolution,
-                content=content,
+                content=json.loads(content),
             ),
         )
         return schemas.SuccessfulChartCreateResponse(id=chart.id, status=Status.ok)
@@ -61,7 +61,7 @@ async def create_update_chart(
             name=chartName,
             symbol=symbol,
             resolution=resolution,
-            content=content,
+            content=json.loads(content),
         ),
     )
     return schemas.SuccessfulChartUpdateDeleteResponse(status=Status.ok)
@@ -76,7 +76,6 @@ async def read_charts(
     clientId: str = Query(..., alias="client"),
     userId: str = Query(..., alias="user"),
     chartId: Optional[str] = Query(""),
-    current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Retrieve charts.
@@ -87,6 +86,13 @@ async def read_charts(
     if chartId == "" or chartId is None:
         # Get list
         charts = await crud.chart.get_multi_by_owner(db=db, ownerSource=clientId, ownerId=userId)
+
+        print("A:", charts)
+
+        for chart in charts:
+            print(chart.name)
+            print(chart.lastModified)
+
         return SuccessfulResponse(
             data=[
                 schemas.ChartGetList(
@@ -122,7 +128,6 @@ async def delete_chart(
     clientId: str = Query(..., alias="client"),
     userId: str = Query(..., alias="user"),
     chartId: str,
-    current_user: models.User = Depends(deps.get_current_active_user),
 ) -> Any:
     """
     Delete an chart.
