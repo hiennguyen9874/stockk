@@ -1,10 +1,8 @@
 import os
+from datetime import timedelta
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from datetime import timedelta
-
-from celery.schedules import crontab
 from pydantic import AnyHttpUrl, BaseSettings, HttpUrl, PostgresDsn, validator
 
 

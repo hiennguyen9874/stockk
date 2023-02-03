@@ -1,27 +1,11 @@
-from typing import (
-    Any,
-    AsyncIterator,
-    Dict,
-    Generic,
-    Iterator,
-    Optional,
-    Tuple,
-    Type,
-    TypeVar,
-    Union,
-)
+from typing import AsyncIterator, Optional
 
-from fastapi.encoders import jsonable_encoder
-from pydantic import BaseModel
-from sqlalchemy import delete, func
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy.orm import Session
-from sqlalchemy.sql import Select
 
 from app.crud.base import CRUDBase
 from app.models.ticker import Ticker
-from app.schemas.ticker import TickerCreate, TickerUpdate, TickerType, TickerExchange
+from app.schemas.ticker import TickerCreate, TickerExchange, TickerType, TickerUpdate
 
 
 class CRUDTicker(CRUDBase[Ticker, TickerCreate, TickerUpdate]):

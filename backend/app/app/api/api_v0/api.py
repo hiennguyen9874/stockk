@@ -2,20 +2,9 @@ from typing import Dict, Union
 
 from fastapi import APIRouter
 
-from app.api.api_v0.endpoints import (
-    industries,
-    items,
-    login,
-    tickers,
-    users,
-    util,
-    tradingview,
-    charts,
-    study_templates,
-    drawing_templates,
-)
-from app.schemas.response import ErrorResponse, ValidationErrorResponse
 from app.api.api_v0.chart_storage import api_router as api_router_chart_storage
+from app.api.api_v0.endpoints import industries, items, login, tickers, tradingview, users, util
+from app.schemas.response import ErrorResponse, ValidationErrorResponse
 
 api_router = APIRouter(
     responses={

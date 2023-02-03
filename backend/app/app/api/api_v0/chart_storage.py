@@ -2,11 +2,7 @@ from typing import Dict, Union
 
 from fastapi import APIRouter
 
-from app.api.api_v0.endpoints import (
-    charts,
-    study_templates,
-    drawing_templates,
-)
+from app.api.api_v0.endpoints import charts, drawing_templates, study_templates
 from app.schemas.response import ErrorResponse, ValidationErrorResponse
 
 api_router = APIRouter(

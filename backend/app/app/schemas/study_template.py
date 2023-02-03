@@ -1,7 +1,6 @@
-from typing import Optional, Dict, Any, Any
+from typing import Any, Dict, Optional
 
 from pydantic import BaseModel, Field
-
 
 from app.schemas.response import Status
 

@@ -2,7 +2,6 @@ from typing import Optional
 
 import pandas as pd
 import requests
-
 from loguru import logger
 
 from app import crud, deps, schemas
@@ -12,7 +11,7 @@ __all__ = ["task_crawl_ticker"]
 
 
 @app.task(name="task_crawl_ticker")
-def task_crawl_ticker() -> None:
+def task_crawl_ticker() -> None:  # noqa: C901
     # Get list of tickers from ssi
 
     try:
@@ -60,4 +59,3 @@ def task_crawl_ticker() -> None:
                 )
             except Exception:
                 logger.error("Error when creating ticker: {error}", row["ticker"])
-    pass

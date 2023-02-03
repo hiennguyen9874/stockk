@@ -5,7 +5,7 @@ from fastapi import APIRouter, Depends
 from app import models, schemas
 from app.api import deps
 from app.schemas.response import Status, SuccessfulResponse
-from app.tasks import test_celery as test_celery_task, task_crawl_ticker
+from app.tasks import task_crawl_ticker
 
 router = APIRouter()
 

@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from sqlalchemy import Column, ForeignKey, Integer, String
-from sqlalchemy.orm import relationship, RelationshipProperty
+from sqlalchemy import Column, Integer, String
 
 from app.db.base_class import Base
 

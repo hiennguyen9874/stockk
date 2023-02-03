@@ -65,9 +65,7 @@ async def validation_exception_handler(
     # Exception
     # Override request validation exceptions
     return JSONResponse(
-        content=ValidationErrorResponse(
-            status=Status.error, message=exc.errors()
-        ).dict(),
+        content=ValidationErrorResponse(status=Status.error, message=exc.errors()).dict(),
         status_code=400,
     )
 

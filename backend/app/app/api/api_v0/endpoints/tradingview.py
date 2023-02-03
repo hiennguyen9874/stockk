@@ -1,16 +1,13 @@
-import time
 import math
-import httpx
+import time
 from typing import Any, List, Optional
 
-import pandas as pd
-import numpy as np
+import httpx
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app import models, schemas, crud
+from app import crud, schemas
 from app.api import deps
-from app.schemas.response import Status, SuccessfulResponse
 
 router = APIRouter()
 
@@ -113,7 +110,7 @@ async def get_search(
     limit: int,
     query: str,
     type: Optional[str] = Query(""),
-    exchange: Optional[str] = Query("")
+    exchange: Optional[str] = Query(""),
 ) -> Any:
     """
     Get tradingview search
@@ -159,7 +156,7 @@ async def get_history(
         "Sec-Fetch-Dest": "empty",
         "Sec-Fetch-Mode": "cors",
         "Sec-Fetch-Site": "same-origin",
-        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",
+        "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36",  # noqa: B950
         "sec-ch-ua": '"Not?A_Brand";v="8", "Chromium";v="108", "Google Chrome";v="108"',
         "sec-ch-ua-mobile": "?0",
         "sec-ch-ua-platform": '"Linux"',
@@ -187,7 +184,6 @@ async def get_symbol_info() -> Any:
     """
     Get tradingview symbol info
     """
-    pass
 
 
 @router.get("/marks")
@@ -195,7 +191,6 @@ async def get_marks() -> Any:
     """
     Get tradingview marks
     """
-    pass
 
 
 @router.get("/timescale_marks")
@@ -208,7 +203,6 @@ async def get_timescale_marks(
     """
     Get tradingview timescale_marks
     """
-    pass
 
 
 @router.get("/quotes")
@@ -216,4 +210,3 @@ async def get_quotes() -> Any:
     """
     Get tradingview quotes
     """
-    pass

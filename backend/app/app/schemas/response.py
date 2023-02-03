@@ -1,7 +1,7 @@
 from enum import Enum
 from typing import Any, Generic, Optional, TypeVar
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 from pydantic.generics import GenericModel
 
 DataT = TypeVar("DataT")

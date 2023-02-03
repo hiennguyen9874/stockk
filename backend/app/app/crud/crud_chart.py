@@ -1,6 +1,5 @@
-from typing import AsyncIterator, Tuple, Any, Optional
+from typing import Any, AsyncIterator, Optional
 
-from fastapi.encoders import jsonable_encoder
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy.orm import defer
